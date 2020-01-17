@@ -1,9 +1,21 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
+import {addTodo} from './redux/actions'
 
-function App() {
-  return (
+class App extends React.Component {
+  
+
+  componentWillMount(){
+    this.props.addTodo();
+  }
+  
+  render(){
+  
+    console.log("Global state", this.props)
+
+    return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -21,6 +33,10 @@ function App() {
       </header>
     </div>
   );
+  }
 }
 
-export default App;
+
+export default connect(state => ({
+  data: state.result
+}),{addTodo})(App);
